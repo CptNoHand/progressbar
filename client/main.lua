@@ -66,7 +66,7 @@ function Process(action, start, tick, finish)
 	ActionStart()
     Action = action
     local ped = PlayerPedId()
-    if not IsEntityDead(ped) or Action.useWhileDead then
+    --if not IsEntityDead(ped) or Action.useWhileDead then
         if not isDoingAction then
             isDoingAction = true
             wasCancelled = false
@@ -92,9 +92,9 @@ function Process(action, start, tick, finish)
                         TriggerEvent("progressbar:client:cancel")
                     end
 
-                    if IsEntityDead(ped) and not Action.useWhileDead then
-                        TriggerEvent("progressbar:client:cancel")
-                    end
+                    --if IsEntityDead(ped) and not Action.useWhileDead then
+                       -- TriggerEvent("progressbar:client:cancel")
+                   -- end
                 end
                 if finish ~= nil then
                     finish(wasCancelled)
@@ -103,9 +103,9 @@ function Process(action, start, tick, finish)
         else
             TriggerEvent("QBCore:Notify", "You are already doing something!", "error")
         end
-    else
-        TriggerEvent("QBCore:Notify", "Cant do that action!", "error")
-    end
+    --else
+        --TriggerEvent("QBCore:Notify", "Cant do that action!", "error")
+    --end
 end
 
 function ActionStart()
