@@ -2,9 +2,8 @@ local Action = {
     name = "",
     duration = 0,
     label = "",
-    useWhileDead = false,
-    canCancel = true,
-	disarm = true,
+    useWhileDead = false,    
+    disarm = true,
     controlDisables = {
         disableMovement = false,
         disableCarMovement = false,
@@ -83,7 +82,7 @@ function Process(action, start, tick, finish)
                     if tick ~= nil then
                         tick()
                     end
-                    if IsControlJustPressed(0, 73) and Action.canCancel then
+                    if IsControlJustPressed(0, 73) then
                         Cancel()
                     end
 
