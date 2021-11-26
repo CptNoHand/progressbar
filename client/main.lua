@@ -1,8 +1,9 @@
 local Action = {
     name = "",
     duration = 0,
-    label = "",
+    label = "",	
     useWhileDead = false,    
+    canCancel = true,
     disarm = true,
     controlDisables = {
         disableMovement = false,
@@ -82,7 +83,8 @@ function Process(action, start, tick, finish)
                     if tick ~= nil then
                         tick()
                     end
-                    if IsControlJustPressed(0, 73) then
+		    if Action.canCancel == false then Action.canCancel = true end
+                    if IsControlJustPressed(0, 73) and Action.canCancel then
                         Cancel()
                     end
 
