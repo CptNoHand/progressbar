@@ -96,10 +96,10 @@ function Process(action, start, tick, finish)
                 end
             end)
         else
-            QBCore.Functions.Notify("You are already doing something")
+            TriggerEvent("QBCore:Notify", "You are already doing something")
         end
     else
-        QBCore.Functions.Notify("Cant do that action")
+        TriggerEvent("QBCore:Notify", "Cant do that action")
     end
 end
 
