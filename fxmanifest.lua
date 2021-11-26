@@ -1,9 +1,6 @@
 fx_version 'cerulean'
 game 'gta5'
 
-description 'progressbar'
-version '1.0.0'
-
 ui_page('html/index.html') 
 
 client_scripts {
@@ -23,5 +20,6 @@ exports {
     'Progress',
     'ProgressWithStartEvent',
     'ProgressWithTickEvent',
-    'ProgressWithStartAndTick'
+    'ProgressWithStartAndTick',
+    'isAction'  -- Check whether the progressbar is running
 }
