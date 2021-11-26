@@ -2,4 +2,4 @@
 Dependency For QB-Core
 
 # Preview
-![Progressbar](https://user-images.githubusercontent.com/72443203/130906133-1f44aec6-7c1b-491d-93d3-815581edc759.png)
+![Progressbar](https://user-images.githubusercontent.com/72443203/143607336-dcf980be-d3e3-4bfe-9566-bd4db085eda4.png)
