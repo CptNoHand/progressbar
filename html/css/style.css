@@ -1,7 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+@import url('https://fonts.googleapis.com/css?family=Bebas Neue');
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
+
 html {
     overflow: hidden;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Bebas Neue';
 }
 
 body {
@@ -17,10 +21,12 @@ body {
     display: none;
     z-index: 5;
     color: #fff;
-    font-family: 'Poppins', sans-serif;
+    border: 1px solid #7e7e7eb2;    
+    border-radius: 5px;
+    font-family: 'Bebas Neue';
     width: 15%;
     position: fixed;
-    bottom: 12.65%;
+    bottom: 20%;
     left: 0;
     right: 0;
     margin-left: auto;
@@ -38,31 +44,58 @@ body {
 }
 
 .progress-labels div {
-    font-size: 1.3vh;
+    font-size: 25px;
+    letter-spacing: 2px;
     line-height: 4vh;
     position: relative;
+    top: -45px;
     color: #ffffff;
     z-index: 10;
-    font-weight: bold;
-    font-family: 'Poppins', sans-serif;
+    font-variant: small-caps;
+    text-transform: uppercase;
 }
 
 .progress-bar-container {
     width: 100%;
-    height: 4vh;
-    background: rgba(0, 0, 0, 0.246);
+    height: 1vh;
+    background: #474747fb;            
     text-align: left;
     overflow: hidden;
     position: relative;
     display: block;
     white-space: nowrap;
-    border-radius: 2px;
+    border-radius: 5px;
 }
 
 .progress-bar {
-    background-color: #dc143c !important;
+    background: #E30636;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #E30636, #ffd8d8);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #E30636, #ffd8d8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     width: 0%;
-    height: 4vh;
-    transition: width 0.3s;
+    height: 1vh;
+    transition: width 0.1s;
     transition-timing-function: ease-out;
+}
+
+.progress-button {
+    background: #E30636;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #E30636, #aa3a52);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #aa3a52, #E30636); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
+    border: 1px solid #7e7e7ead;   
+    width: 40px;
+    height: 40px;    
+    display: none;    
+    margin-top: 84vh;
+    margin-left: 86vh;        
+    transform: rotate(45deg); 
+}
+
+.progress-button-text {
+    width: 100%;
+    height: 100%;  
+    color: #fff;
+    margin-left: 0.2vh;  
+    margin-top: 0.25vh;      
+    text-align: center;
+    transform: rotate(-45deg);
 }

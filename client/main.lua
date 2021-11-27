@@ -1,10 +1,10 @@
 local Action = {
     name = "",
     duration = 0,
-    label = "",
-    useWhileDead = false,
+    label = "",	
+    useWhileDead = false,    
     canCancel = true,
-	disarm = true,
+    disarm = true,
     controlDisables = {
         disableMovement = false,
         disableCarMovement = false,
@@ -41,10 +41,6 @@ local prop_net = nil
 local propTwo_net = nil
 local runProgThread = false
 
-RegisterNetEvent('progressbar:client:ToggleBusyness', function(bool)
-    isDoingAction = bool
-end)
-
 function Progress(action, finish)
 	Process(action, nil, nil, finish)
 end
@@ -64,8 +60,8 @@ end
 function Process(action, start, tick, finish)
 	ActionStart()
     Action = action
-    local ped = PlayerPedId()
-    if not IsEntityDead(ped) or Action.useWhileDead then
+
+    if not IsEntityDead(PlayerPedId()) or Action.useWhileDead then
         if not isDoingAction then
             isDoingAction = true
             wasCancelled = false
@@ -87,12 +83,13 @@ function Process(action, start, tick, finish)
                     if tick ~= nil then
                         tick()
                     end
-                    if IsControlJustPressed(0, 200) and Action.canCancel then
-                        TriggerEvent("progressbar:client:cancel")
+		    if Action.canCancel == false then Action.canCancel = true end
+                    if IsControlJustPressed(0, 73) and Action.canCancel then
+                        Cancel()
                     end
 
-                    if IsEntityDead(ped) and not Action.useWhileDead then
-                        TriggerEvent("progressbar:client:cancel")
+                    if IsEntityDead(PlayerPedId()) and not Action.useWhileDead then
+                        Cancel()
                     end
                 end
                 if finish ~= nil then
@@ -100,10 +97,10 @@ function Process(action, start, tick, finish)
                 end
             end)
         else
-            TriggerEvent("QBCore:Notify", "You are already doing something!", "error")
+            TriggerEvent("QBCore:Notify", "You are already doing something")
         end
     else
-        TriggerEvent("QBCore:Notify", "Cant do that action!", "error")
+        TriggerEvent("QBCore:Notify", "Cant do that action")
     end
 end
 
@@ -126,23 +123,19 @@ function ActionStart()
                             if (DoesEntityExist(player) and not IsEntityDead(player)) then
                                 loadAnimDict( Action.animation.animDict)
                                 TaskPlayAnim(player, Action.animation.animDict, Action.animation.anim, 3.0, 3.0, -1, Action.animation.flags, 0, 0, 0, 0 )     
-                            end
-                        else
-                            --TaskStartScenarioInPlace(PlayerPedId(), 'PROP_HUMAN_BUM_BIN', 0, true)
+                            end                        
                         end
                     end
-
                     isAnim = true
                 end
                 if not isProp and Action.prop ~= nil and Action.prop.model ~= nil then
-                    local ped = PlayerPedId()
                     RequestModel(Action.prop.model)
 
                     while not HasModelLoaded(GetHashKey(Action.prop.model)) do
                         Wait(0)
                     end
 
-                    local pCoords = GetOffsetFromEntityInWorldCoords(ped, 0.0, 0.0, 0.0)
+                    local pCoords = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 0.0, 0.0)
                     local modelSpawn = CreateObject(GetHashKey(Action.prop.model), pCoords.x, pCoords.y, pCoords.z, true, true, true)
 
                     local netid = ObjToNet(modelSpawn)
@@ -161,7 +154,7 @@ function ActionStart()
                         Action.prop.rotation = { x = 0.0, y = 0.0, z = 0.0 }
                     end
 
-                    AttachEntityToEntity(modelSpawn, ped, GetPedBoneIndex(ped, Action.prop.bone), Action.prop.coords.x, Action.prop.coords.y, Action.prop.coords.z, Action.prop.rotation.x, Action.prop.rotation.y, Action.prop.rotation.z, 1, 1, 0, 1, 0, 1)
+                    AttachEntityToEntity(modelSpawn, PlayerPedId(), GetPedBoneIndex(PlayerPedId(), Action.prop.bone), Action.prop.coords.x, Action.prop.coords.y, Action.prop.coords.z, Action.prop.rotation.x, Action.prop.rotation.y, Action.prop.rotation.z, 1, 1, 0, 1, 0, 1)
                     prop_net = netid
 
                     isProp = true
@@ -173,7 +166,7 @@ function ActionStart()
                             Wait(0)
                         end
 
-                        local pCoords = GetOffsetFromEntityInWorldCoords(ped, 0.0, 0.0, 0.0)
+                        local pCoords = GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 0.0, 0.0)
                         local modelSpawn = CreateObject(GetHashKey(Action.propTwo.model), pCoords.x, pCoords.y, pCoords.z, true, true, true)
 
                         local netid = ObjToNet(modelSpawn)
@@ -192,14 +185,14 @@ function ActionStart()
                             Action.propTwo.rotation = { x = 0.0, y = 0.0, z = 0.0 }
                         end
 
-                        AttachEntityToEntity(modelSpawn, ped, GetPedBoneIndex(ped, Action.propTwo.bone), Action.propTwo.coords.x, Action.propTwo.coords.y, Action.propTwo.coords.z, Action.propTwo.rotation.x, Action.propTwo.rotation.y, Action.propTwo.rotation.z, 1, 1, 0, 1, 0, 1)
+                        AttachEntityToEntity(modelSpawn, PlayerPedId(), GetPedBoneIndex(PlayerPedId(), Action.propTwo.bone), Action.propTwo.coords.x, Action.propTwo.coords.y, Action.propTwo.coords.z, Action.propTwo.rotation.x, Action.propTwo.rotation.y, Action.propTwo.rotation.z, 1, 1, 0, 1, 0, 1)
                         propTwo_net = netid
 
                         isPropTwo = true
                     end
                 end
 
-                DisableActions(ped)
+                DisableActions(PlayerPedId())
             end
             Wait(0)
         end
@@ -207,20 +200,19 @@ function ActionStart()
 end
 
 function Cancel()
-    isDoingAction = false
+    isDoingAction = false    
     wasCancelled = true
     LocalPlayer.state:set("inv_busy", false, true) -- Not Busy
     ActionCleanup()
-
     SendNUIMessage({
         action = "cancel"
     })
 end
 
 function Finish()
-    isDoingAction = false
-    ActionCleanup()
+    isDoingAction = false     
     LocalPlayer.state:set("inv_busy", false, true) -- Not Busy
+    ActionCleanup()
 end
 
 function ActionCleanup()
@@ -312,4 +304,8 @@ end)
 
 RegisterNUICallback('FinishAction', function(data, cb)
 	Finish()
+end)
+
+exports('isAction', function()   
+    return isDoingAction
 end)
