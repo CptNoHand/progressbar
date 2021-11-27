@@ -68,9 +68,9 @@ body {
 }
 
 .progress-bar {
-    background: #E30636;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #E30636, #ffd8d8);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #E30636, #ffd8d8); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #06e3a1;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #06e3c5, #d8fffa);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #06e3c5, #d8fffa); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     width: 0%;
     height: 1vh;
     transition: width 0.1s;
@@ -78,9 +78,9 @@ body {
 }
 
 .progress-button {
-    background: #E30636;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #E30636, #aa3a52);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #aa3a52, #E30636); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
+    background: #06dce3;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #06e3d8, #3aaaaa);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #3aaaa4, #06d4e3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
     border: 1px solid #7e7e7ead;   
     width: 40px;
     height: 40px;    
