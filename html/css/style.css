@@ -77,25 +77,3 @@ body {
     transition-timing-function: ease-out;
 }
 
-.progress-button {
-    background: #06dce3;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #06e3d8, #3aaaaa);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #3aaaa4, #06d4e3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */    
-    border: 1px solid #7e7e7ead;   
-    width: 40px;
-    height: 40px;    
-    display: none;    
-    margin-top: 84vh;
-    margin-left: 86vh;        
-    transform: rotate(45deg); 
-}
-
-.progress-button-text {
-    width: 100%;
-    height: 100%;  
-    color: #fff;
-    margin-left: 0.2vh;  
-    margin-top: 0.25vh;      
-    text-align: center;
-    transform: rotate(-45deg);
-}
